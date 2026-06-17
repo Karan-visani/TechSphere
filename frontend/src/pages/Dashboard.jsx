@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { authContext } from '../context/AuthProvider'
 
 const Dashboard = () => {
+
   return (
     <div>
       dfvdfv

@@ -1,5 +1,6 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import API from '../api/axios'
+
 
 export const authContext = createContext()
 
@@ -25,8 +26,23 @@ const logout = async(formData) =>{
 
     setUser(null)
 }
+
+const currentUser = async ()=>{
+    try{
+        const res = await API.get("/auth/me")
+
+    setUser(res.data)
+    }catch(error){
+        setUser(null)
+    }
+}
+
+
+    useEffect(() => {
+        currentUser()
+    }, [])
     return (
-    <authContext.Provider value={{login,register,logout}}>
+    <authContext.Provider value={{login,register,logout,user}}>
         {children}
     </authContext.Provider>
   )
