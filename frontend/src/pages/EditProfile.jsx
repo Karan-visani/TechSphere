@@ -18,8 +18,8 @@ const EditProfile = () => {
     }
 
     useEffect(() => {
-      getUser
-    })
+      getUser()
+    },[])
     
 
     const submitHandler =async (e) =>{

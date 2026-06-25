@@ -48,7 +48,7 @@ const Profile = () => {
     </div>
     <div className="flex justify-between border-b pb-4">
       <p className="text-gray-500 text-lg font-medium w-1/2">Address</p>
-      <p className="font-semibold text-lg break w-1/2">{loggedInUser.address}</p>
+      <p className="font-semibold text-lg">{loggedInUser.address}</p>
     </div>
     <div className="flex justify-between border-b pb-4">
       <p className="text-gray-500 text-lg font-medium">Role</p>
