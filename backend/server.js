@@ -5,6 +5,7 @@ const express = require("express")
 const cors = require("cors")
 const authRouter = require("./routes/authRoutes")
 const cookieParser = require("cookie-parser")
+const profileRouter = require("./routes/profileRoutes")
 
 require("dotenv").config()
 
@@ -18,6 +19,7 @@ app.use(cookieParser())
 connectDB()
 
 app.use("/auth",authRouter)
+app.use("/user",profileRouter)
 
 
 app.listen(process.env.PORT)

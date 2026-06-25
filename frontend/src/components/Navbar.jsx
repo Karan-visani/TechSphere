@@ -18,6 +18,7 @@ const Navbar = () => {
         <Link to={'/dashboard'} className='text-xl font-semibold hover:text-gray-400'>Dashboard</Link>
         <h2 className='text-xl font-semibold hover:text-gray-400'>Contact</h2>
         <h2 className='text-xl font-semibold hover:text-gray-400'>About</h2>
+        <Link to={"/profile"} className='text-xl font-semibold hover:text-gray-400'>Profile</Link>
         {user?
           <button onClick={logoutHandler} className='text-xl font-semibold text-red-700 hover:scale-110'>Logout</button>
         :
