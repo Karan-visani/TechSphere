@@ -14,14 +14,18 @@ const Profile = () => {
 
   useEffect(() => {
     getUser()
-  })
+  },[])
   
   
 
   return (
     <div className= 'min-h-[85vh] w-full flex p-8 overflow-x-auto'>
         <div className=' flex w-1/3 flex-col gap-10 items-center py-4'>
-        <img src={profile} alt="" className='h-[250px] w-[250px] rounded-full bg-blue-50 '/>
+        <img
+    src={loggedInUser.avatar || profile}
+    alt="Profile"
+    className="h-[250px] w-[250px] rounded-full object-cover"
+/>
         <div className='flex flex-col items-center justify-center'>
         <h2 className='text-2xl font-semibold '>{loggedInUser.name}</h2>
         <h2 className='text-2xl font-semibold '>{loggedInUser.email}</h2>

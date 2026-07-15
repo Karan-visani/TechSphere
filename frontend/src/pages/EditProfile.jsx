@@ -11,10 +11,17 @@ const EditProfile = () => {
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
     const [address, setAddress] = useState("")
+    const [avatar, setAvatar] = useState(null)
+const [preview, setPreview] = useState("")
 
     const getUser = async () =>{
         const res = await API.get("user/profile")
         setEmail(res.data.email)
+        setName(res.data.name)
+        setEmail(res.data.email)
+        setPhone(res.data.phone || "")
+        setAddress(res.data.address || "")
+        setPreview(res.data.avatar || "")
     }
 
     useEffect(() => {
@@ -33,16 +40,49 @@ const EditProfile = () => {
         }
 
         await API.put("user/profile",formData)
+
+        if (avatar) {
+            await uploadAvatar()
+        }
+
         toast.success("Profile Edited")
         navigate("/profile")
         
-        setFullname("")
+        setName("")
         setPhone("")
         setAddress("")
         }catch(error){
         toast.error(error.response?.data?.message || "Something went wrong")
         }
     }
+
+    const handleAvatarChange = (e) => {
+
+    const file = e.target.files[0]
+
+    if (!file) return
+
+    setAvatar(file)
+
+    setPreview(URL.createObjectURL(file))
+}
+
+const uploadAvatar = async () => {
+
+    if (!avatar) return
+
+    const formData = new FormData()
+
+    formData.append("avatar", avatar)
+
+    const res = await API.put(
+        "/user/avatar",
+        formData
+    )
+
+    setPreview(res.data.avatar)
+toast.success("Avatar Updated")
+}
   return (
     <div  className="min-h-screen bg-slate-950 flex justify-center items-center p-8 overflow-y-auto">
       <div className="w-full max-w-3xl bg-slate-900 rounded-2xl shadow-2xl p-10 border border-slate-800">
@@ -52,11 +92,25 @@ const EditProfile = () => {
         </h1>
 
         <div className="flex items-center gap-6 mb-10">
-          <div className="w-24 h-24 rounded-full bg-slate-700"></div>
+          <img
+          src={preview || "/default-avatar.png"}
+          alt="Avatar"
+          className="w-24 h-24 rounded-full object-cover border-2 border-blue-500"
+          />
+          <input
+              type="file"
+              accept="image/*"
+              hidden
+              id="avatar"
+              onChange={handleAvatarChange}
+              />
 
-          <button className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
-            Change Avatar
-          </button>
+          <label
+    htmlFor="avatar"
+    className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg cursor-pointer"
+>
+    Change Avatar
+</label>
         </div>
 
         <form onSubmit={(e)=>{

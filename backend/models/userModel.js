@@ -19,8 +19,8 @@ const User = mongoose.model(
         },
         role:{
             type:String,
-            enum:["customer","seller","admin"],
-            default:"customer",
+            enum:["Customer","Seller","Admin"],
+            default:"Customer",
         },
         avatar:{
             type:String,
