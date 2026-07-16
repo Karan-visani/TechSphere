@@ -7,6 +7,7 @@ const cors = require("cors")
 const authRouter = require("./routes/authRoutes")
 const cookieParser = require("cookie-parser")
 const profileRouter = require("./routes/profileRoutes")
+const productRouter = require("./routes/productRoutes")
 
 
 const app = express()
@@ -20,6 +21,7 @@ connectDB()
 
 app.use("/auth",authRouter)
 app.use("/user",profileRouter)
+app.use("/products",productRouter)
 
 
 app.listen(process.env.PORT)
