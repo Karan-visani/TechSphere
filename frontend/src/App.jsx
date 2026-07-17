@@ -6,6 +6,10 @@ import Login from './pages/Login'
 import Registration from './pages/Registration'
 import Profile from './pages/Profile'
 import EditProfile from './pages/EditProfile'
+import Products from './pages/Products'
+import AddProduct from './pages/AddProducts'
+import ProductDetails from './pages/ProductDetails'
+import EditProduct from './pages/EditProduct'
 
 const App = () => {
   return (
@@ -17,6 +21,10 @@ const App = () => {
         <Route path='/registration' element={<Registration/>}/>
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/profile/editProfile' element={<EditProfile/>}/>
+        <Route path='/products' element={<Products/>}/>
+        <Route path='/products/add' element={<AddProduct/>}/>
+        <Route path='/products/details' element={<ProductDetails/>}/>
+        <Route path='/products/edit' element={<EditProduct/>}/>
       </Routes>
     </div>
   )

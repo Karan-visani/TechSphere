@@ -5,12 +5,15 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import AuthProvider from './context/AuthProvider.jsx'
 import {Toaster} from 'react-hot-toast'
+import ProductProvider from './context/ProductProvider.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
   <AuthProvider>
+    <ProductProvider>
     <Toaster position='top-center'/>
     <App />
+    </ProductProvider>
   </AuthProvider>
   </BrowserRouter>
 )
