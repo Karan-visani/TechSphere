@@ -32,7 +32,7 @@ const AddProduct = () => {
         }
         await createProduct(formData)
         toast.success("Product Added Successfully")
-        navigate("/products")
+        navigate("/adminProducts")
   }catch(error){
     console.log(error);
     
