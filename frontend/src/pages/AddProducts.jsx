@@ -13,6 +13,9 @@ const AddProduct = () => {
   const [stock, setStock] = useState("")
   const [ratings, setRatings] = useState("")
   const [isFeatured, setIsFeatured] = useState(false)
+  const [image, setImage] = useState(null);
+  const [preview, setPreview] = useState("");
+
   const navigate = useNavigate()
 
   const {createProduct} = useContext(productContext)
@@ -21,16 +24,21 @@ const AddProduct = () => {
     try{
       e.preventDefault()
     
-        const formData = {
-          name,
-          description,
-          brand,
-          category,
-          price,
-          stock,
-          isFeatured
+        const formData = new FormData();
+
+        formData.append("name", name);
+        formData.append("description", description);
+        formData.append("brand", brand);
+        formData.append("category", category);
+        formData.append("price", price);
+        formData.append("stock", stock);
+        formData.append("isFeatured", isFeatured);
+
+        if (image) {
+            formData.append("image", image);
         }
-        await createProduct(formData)
+
+        await createProduct(formData);
         toast.success("Product Added Successfully")
         navigate("/adminProducts")
   }catch(error){
@@ -204,33 +212,66 @@ const AddProduct = () => {
           </div>
 
 
-          <div>
+<div className="space-y-3">
 
-            <label className="block mb-2 text-slate-300 font-medium">
-              Product Images
-            </label>
+  <label className="block text-slate-300 font-medium">
+    Product Image
+  </label>
 
-            <div className="border-2 border-dashed border-slate-700 rounded-2xl p-10 flex flex-col justify-center items-center text-slate-400 hover:border-blue-600 transition">
+  <label
+    htmlFor="productImage"
+    className="flex flex-col items-center justify-center w-full h-64 rounded-2xl border-2 border-dashed border-slate-700 bg-slate-800/60 cursor-pointer hover:border-blue-500 hover:bg-slate-800 transition-all duration-300"
+  >
+    {preview ? (
+      <img
+        src={preview}
+        alt="Preview"
+        className="w-full h-full object-cover rounded-2xl"
+      />
+    ) : (
+      <>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-14 h-14 text-slate-500 mb-3"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={1.5}
+            d="M3 15l4-4a2 2 0 012.828 0L14 15m-2-2l1-1a2 2 0 012.828 0L21 17M7 7h.01M4 5h16a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V7a2 2 0 012-2z"
+          />
+        </svg>
 
-              <p className="text-lg">
-                Drag & Drop Images Here
-              </p>
+        <p className="text-white font-medium">
+          Click to upload product image
+        </p>
 
-              <p className="text-sm mt-2">
-                or
-              </p>
+        <p className="text-sm text-slate-400 mt-1">
+          PNG, JPG, JPEG (Max 5MB)
+        </p>
+      </>
+    )}
+  </label>
 
-              <button
-                type="button"
-                className="mt-4 px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white"
-              >
-                Browse Files
-              </button>
+  <input
+    id="productImage"
+    type="file"
+    accept="image/*"
+    className="hidden"
+    onChange={(e) => {
+      const file = e.target.files[0];
 
-            </div>
+      if (!file) return;
 
-          </div>
+      setImage(file);
+      setPreview(URL.createObjectURL(file));
+    }}
+  />
 
+</div>
 
           <div className="flex justify-end gap-5 pt-5">
 

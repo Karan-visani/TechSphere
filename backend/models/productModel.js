@@ -36,15 +36,22 @@ const Product = mongoose.model(
         },
         images: [
         {
-            type: String,
+            url: {
+                type: String,
+                required: true,
+            },
+            public_id: {
+                type: String,
+                required: true,
+            },
         },
         ],
         ratings:{
-            type:String,
+            type:Number,
             default:0,
         },
         numReviews:{
-            type:String,
+            type:Number,
             default:0,
         },
         isFeatured: {

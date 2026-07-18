@@ -117,11 +117,11 @@ const AdminProducts = () => {
 
                 <td className="p-4">
 
-                  <img
-                    src="https://placehold.co/80"
-                    alt=""
-                    className="w-16 h-16 rounded-lg object-cover"
-                  />
+                <img
+                  src={product.images?.[0]?.url}
+                  alt={product.name}
+                  className="w-14 h-14 rounded-lg object-cover"
+                />        
 
                 </td>
 

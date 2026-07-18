@@ -36,12 +36,11 @@ const ProductDetails = () => {
 
             <div className="bg-slate-900 rounded-3xl overflow-hidden border border-slate-800">
 
-              <img
-                src="https://placehold.co/700x700"
-                alt=""
-                className="w-full h-[550px] object-cover"
-              />
-
+            <img
+              src={product.images?.[0]?.url}
+              alt={product.name}
+              className="w-full h-64 object-cover rounded-xl"
+            />
             </div>
 
 

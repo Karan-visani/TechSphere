@@ -63,11 +63,11 @@ const Products = () => {
       key={product._id}
       className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-blue-600 hover:-translate-y-2 transition duration-300 shadow-xl"
     >
-      <img
-        src="https://placehold.co/500x350"
-        alt=""
-        className="w-full h-56 object-cover"
-      />
+    <img
+      src={product.images?.[0]?.url}
+      alt={product.name}
+      className="w-full h-64 object-cover rounded-xl"
+    />
 
       <div className="p-5">
         <span className="text-sm text-blue-400">
